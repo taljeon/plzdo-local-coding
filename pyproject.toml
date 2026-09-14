@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plzdo-local-runtime"
+version = "0.3.0"
+description = "Bounded local runtime with fixed Ollama public composition"
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["plzdo==0.3.0", "jsonschema==4.25.1"]
+
+[tool.setuptools]
+packages = ["local_coding"]
+script-files = ["bin/plzdo-local-code", "bin/plzdo_runtime_entry.py"]
+include-package-data = false
+
+[tool.setuptools.package-data]
+local_coding = [
+    "_engine/composition.py",
+    "_engine/kernel.py",
+    "_engine/contracts.py",
+    "_engine/scope_authority.py",
+    "_engine/parent_authority.py",
+    "_engine/ledger.py",
+    "_engine/state_io.py",
+    "_engine/engine_types.py",
+    "_engine/json_codec.py",
+    "_engine/provider_common.py",
+    "_engine/host_paths.py",
+    "_engine/workflow.py",
+    "_engine/workflow_core.py",
+    "_engine/workflow_validation.py",
+    "_engine/workflow_artifacts.py",
+    "_engine/workflow_browser.py",
+    "_engine/workflow_preview.py",
+    "_engine/workflow_metrics.py",
+    "_engine/run_bounded.py",
+    "_engine/node_runtime_policy.py",
+    "_engine/browser_check.cjs",
+    "_engine/generate_edits.py",
+    "_engine/generate_stream.py",
+    "_engine/generation_health.py",
+    "_engine/generation_profile.py",
+    "_engine/local_model.py",
+    "_engine/ollama_engine.py",
+    "_engine/workflow_routing.py",
+    "_engine/runtime-policies/node-24.10.0-darwin-arm64.json",
+    "schemas/authority-common.schema.json",
+    "schemas/standalone-contract.schema.json",
+    "schemas/scoped-task.schema.json",
+    "schemas/parent-delegation.schema.json",
+    "schemas/parent-scoped-contract.schema.json",
+    "schemas/result.schema.json",
+]

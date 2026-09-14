@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlzDo local process result v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "runtime_version",
+    "command",
+    "state",
+    "exit_code",
+    "apply_status",
+    "publication_authority"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "plzdo.local.cli-result.v2"
+    },
+    "runtime_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "command": {
+      "enum": [
+        "doctor",
+        "contract",
+        "delegation",
+        "scope",
+        "validate",
+        "route",
+        "run",
+        "retry",
+        "status",
+        "metrics",
+        "preview",
+        "finish-browser"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "apply_status": {
+      "const": "not_applied"
+    },
+    "publication_authority": {
+      "const": false
+    },
+    "result": {
+      "type": "object"
+    },
+    "error_code": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "review_payload_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "final": {
+      "type": "boolean"
+    },
+    "closure_required": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "exit_code": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "exit_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "command": {
+            "const": "preview"
+          },
+          "state": {
+            "const": "preview_running"
+          },
+          "final": {
+            "const": false
+          },
+          "closure_required": {
+            "const": true
+          }
+        },
+        "required": [
+          "final",
+          "closure_required"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "plzdo.private-config.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "stateRoot", "providerPins"],
+  "properties": {
+    "schemaVersion": {"const": "plzdo.private-config.v1"},
+    "stateRoot": {"type": "string", "pattern": "^/"},
+    "codexModel": {"type": "string", "pattern": "^[A-Za-z0-9._:-]{1,100}$", "not": {"pattern": "[Qq][Ww][Ee][Nn]|[Oo][Ll][Ll][Aa][Mm][Aa]|[Ll][Ll][Aa][Mm][Aa]"}},
+    "agyModel": {"type": "string", "enum": ["gemini-3.8-flash-high", "gemini-3.8-flash-medium"]},
+    "agyGlobalRulesSha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+    "providerPins": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "codex-openai": {"$ref": "#/$defs/binary"},
+        "claude": {"$ref": "#/$defs/binary"},
+        "grok-cli": {"$ref": "#/$defs/binary"},
+        "agy": {"allOf": [{"$ref": "#/$defs/binary"}, {"properties": {
+          "sha256": {"const": "cabadc15a61944372bede1fdff186701c17467dd9d718e97dc79283055d3c101"}
+        }}]}
+      }
+    }
+  },
+  "allOf": [
+    {"if": {"required": ["codexModel"]}, "then": {"properties": {"providerPins": {"required": ["codex-openai"]}}}},
+    {"if": {"properties": {"providerPins": {"required": ["agy"]}}},
+     "then": {"required": ["agyModel", "agyGlobalRulesSha256"]},
+     "else": {"not": {"anyOf": [{"required": ["agyModel"]}, {"required": ["agyGlobalRulesSha256"]}]}}}
+  ],
+  "$defs": {
+    "binary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^/"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    }
+  }
+}

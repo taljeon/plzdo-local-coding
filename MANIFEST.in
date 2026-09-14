@@ -1,0 +1,46 @@
+include README.md AGENTS.md CHECKS.md pyproject.toml constraints.txt
+include bin/plzdo-local-code bin/plzdo_runtime_entry.py
+include local_coding/__init__.py local_coding/__main__.py local_coding/_bootstrap.py local_coding/api.py local_coding/cli.py
+include local_coding/_engine/composition.py
+include local_coding/_engine/kernel.py
+include local_coding/_engine/contracts.py
+include local_coding/_engine/scope_authority.py
+include local_coding/_engine/parent_authority.py
+include local_coding/_engine/ledger.py
+include local_coding/_engine/state_io.py
+include local_coding/_engine/engine_types.py
+include local_coding/_engine/json_codec.py
+include local_coding/_engine/provider_common.py
+include local_coding/_engine/host_paths.py
+include local_coding/_engine/workflow.py
+include local_coding/_engine/workflow_core.py
+include local_coding/_engine/workflow_validation.py
+include local_coding/_engine/workflow_artifacts.py
+include local_coding/_engine/workflow_browser.py
+include local_coding/_engine/workflow_preview.py
+include local_coding/_engine/workflow_metrics.py
+include local_coding/_engine/run_bounded.py
+include local_coding/_engine/node_runtime_policy.py
+include local_coding/_engine/browser_check.cjs
+include local_coding/_engine/generate_edits.py
+include local_coding/_engine/generate_stream.py
+include local_coding/_engine/generation_health.py
+include local_coding/_engine/generation_profile.py
+include local_coding/_engine/local_model.py
+include local_coding/_engine/ollama_engine.py
+include local_coding/_engine/workflow_routing.py
+include local_coding/_engine/runtime-policies/node-24.10.0-darwin-arm64.json
+include local_coding/schemas/authority-common.schema.json
+include local_coding/schemas/standalone-contract.schema.json
+include local_coding/schemas/scoped-task.schema.json
+include local_coding/schemas/parent-delegation.schema.json
+include local_coding/schemas/parent-scoped-contract.schema.json
+include local_coding/schemas/result.schema.json
+recursive-include tests *.py
+include docs/test-adaptations.md docs/test-retirement-inventory.json
+include scripts/verify-harness.sh scripts/validate-local.sh scripts/harness-env.sh scripts/verify-real-sandbox.py
+global-exclude __pycache__ *.py[cod] .DS_Store
+prune evidence
+prune private-state
+prune build
+prune dist

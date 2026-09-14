@@ -1,0 +1,310 @@
+{
+  "schema": "plzdo.test-migration.v1",
+  "baseline": "plzdo-local-coding-p3/approval-autonomy-20260913/runtime-candidate/tests (unchanged)",
+  "changes": [
+    {
+      "path": "tests/test_automation_authority.py",
+      "previous_sha256": "9202ddfd0ff42e59f146ab03ce18e85f31ea0b40a4ad47e5f906559d552ac697",
+      "status": "retired-from-current-collection",
+      "reason": "Scheduler/automation authority is outside the public v2 product."
+    },
+    {
+      "path": "tests/test_automation_cli.py",
+      "previous_sha256": "8ce1b58b09633f54f46f82227aa8979be6aacce77053fee446f98fb06499f3c2",
+      "status": "retired-from-current-collection",
+      "reason": "Scheduler/automation commands were removed."
+    },
+    {
+      "path": "tests/test_scheduled_local.py",
+      "previous_sha256": "30ac41842a6f6ca6b48a6949bf2371d6e3ec87b2f2aecd09e2bc473296998934",
+      "status": "retired-from-current-collection",
+      "reason": "The scheduled lane is not part of public or private v2 composition."
+    },
+    {
+      "path": "tests/test_grok_approval_preflight.py",
+      "previous_sha256": "7fa8ba23e86b94cb08532175049c7cff3977b5147a1e8fdff3856d211598fc34",
+      "status": "retired-from-current-collection",
+      "reason": "External admission now belongs to the separate private overlay."
+    },
+    {
+      "path": "tests/test_grok_approval_transaction.py",
+      "previous_sha256": "fd814f227beea29ac6817da8f1f739f5ed06eef6112e1462083d3801d88de62b",
+      "status": "retired-from-current-collection",
+      "reason": "External admission now belongs to the separate private overlay."
+    },
+    {
+      "path": "tests/test_p2_grok.py",
+      "previous_sha256": "75444507cd7a5700129f16f3e3ed853340bcdbcea5ce2c324ecadebd9ecdfe61",
+      "status": "retired-from-current-collection",
+      "reason": "Public external-provider CLI was removed."
+    },
+    {
+      "path": "tests/test_p2_authority.py",
+      "previous_sha256": "1d99d1d764ac79adc178818909f3e0b138d73e19e90c321c9d57d8d0864d1847",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by v2 concrete authority and Kernel/ledger tests; no v1 grant execution."
+    },
+    {
+      "path": "tests/test_p2_cli.py",
+      "previous_sha256": "72a3bab7d9385242ee7718bc7534ed22dfb2fd7562ef59d0081a070c15cd86ee",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by v2 CLI/kernel and isolated launcher tests."
+    },
+    {
+      "path": "tests/test_parent_authority.py",
+      "previous_sha256": "04dd8ac77acc52ac22f27e436d35837530569369a37d21096e4d16fa3c85e379",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by current v2 parent snapshot/authority tests."
+    },
+    {
+      "path": "tests/test_parent_scope.py",
+      "previous_sha256": "99c85413c58e895f9ce5e3736908e3235ed2f124edd7b8ebffc574a475f132ce",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by current v2 parent-scope schema and snapshot tests."
+    },
+    {
+      "path": "tests/test_scope_authority.py",
+      "previous_sha256": "0e03dccff747fd1fc45ef59f5ba3e3ca195aebe521db985b70794bba1845d9e9",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by current v2 scope authority and ledger tests."
+    },
+    {
+      "path": "tests/test_scope_cli.py",
+      "previous_sha256": "af0082052e1de959a78caea115176937dc50ce258d39e4fdfa7b7b2349d3e190",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by v2 closed local CLI/schema tests."
+    },
+    {
+      "path": "tests/test_scoped_deadline.py",
+      "previous_sha256": "6c800ddc626b06ef790d42ea55e27084bf9b24a7b88baea512830c5d4c9f8dfe",
+      "status": "retired-from-current-collection",
+      "reason": "V1 provider/child-send API retired; fresh expiry accounting is tested by v2 authority/Kernel tests."
+    },
+    {
+      "path": "tests/test_preview_authority.py",
+      "previous_sha256": "99b4ed723f3d4eb65ffdb0e9198c88507a2012288716262fe95ec8c7dd630d95",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by v2 authority tests and shared browser pipeline/finalization tests."
+    },
+    {
+      "path": "tests/legacy/test_check_candidate.py",
+      "previous_sha256": "ba9b0d8ec430d344e21120eecb4b1ec4299eac7cf12bec68b2f6b7f2144abfdd",
+      "status": "retired-from-current-collection",
+      "reason": "Historical pilot checker helper retired; current immutable checker remains covered."
+    },
+    {
+      "path": "tests/legacy/test_validated_edits.py",
+      "previous_sha256": "9c552c6d5c14d2a6e464e18a558195483e3ca837b75e4bc11fbe04ca6fce444b",
+      "status": "retired-from-current-collection",
+      "reason": "Historical pilot edit helper retired; current workflow_core/artifact validation remains covered."
+    },
+    {
+      "path": "tests/legacy/test_pilot_config.py",
+      "previous_sha256": "ecb2388db24c43bfd67b3e44836f755bbe39dc04535d5bfc86e76f4776330c5e",
+      "status": "retired-from-current-collection",
+      "reason": "Historical pilot/global HN configuration is not a current runtime input."
+    },
+    {
+      "path": "tests/legacy/test_structured_protocol.py",
+      "previous_sha256": "da75cbbcc4059144f66b51fa181922f91ee8758f37c259ca4f7ea75b8e5df1c3",
+      "status": "retired-from-current-collection",
+      "reason": "Historical pilot/local retry orchestration retired; current stream/profile tests retained."
+    },
+    {
+      "path": "tests/legacy/test_workflow_providers.py",
+      "previous_sha256": "95e769e69f94dfb2e7e538111dfd860c4e9c9be20ff0a8185e75885315a73392",
+      "status": "retired-from-current-collection",
+      "reason": "External transports belong to the private overlay tests."
+    },
+    {
+      "path": "tests/legacy/test_workflow.py",
+      "previous_sha256": "597d111612ad1d72aa30d561dad6c3a5e3ceb2c39652b0266fab08d37c4017be",
+      "status": "retired-from-current-collection",
+      "reason": "Old callback routing, injection and public fallback replaced by shared Kernel pipeline tests."
+    },
+    {
+      "path": "tests/legacy/test_workflow_kinds.py",
+      "previous_sha256": "8ac63894494a920d3a086ddae0b6fb65e51d3a6fec2a0a836ad1c7af4ee61c51",
+      "status": "retired-from-current-collection",
+      "reason": "Old routing replaced by closed v2 packets, shared pipeline and zero-provider compute handoff tests."
+    },
+    {
+      "path": "tests/legacy/test_workflow_lifecycle.py",
+      "previous_sha256": "ba8bd66fa787074a726b173c5741c738455527f9e4529c4d93506f8d083179ea",
+      "status": "retired-from-current-collection",
+      "reason": "Old CLI callback lifecycle replaced by owned Ollama/process cleanup and model-slot tests."
+    },
+    {
+      "path": "tests/legacy/test_workflow_resume.py",
+      "previous_sha256": "828b2b4950d113671264ab6cfdc07832eff5d7ed13e5d61c8cd1b7eca70650fe",
+      "status": "retired-from-current-collection",
+      "reason": "Old provider callback resume replaced by exact receipt and same-slot browser-finalization tests."
+    },
+    {
+      "path": "tests/legacy/test_huihui_adoption.py",
+      "previous_sha256": "0cf7f0f07c9ce8fdf9182d479402d076641c3d1c14788f376e125848793287e5",
+      "status": "retired-from-current-collection",
+      "reason": "Replaced by current strict Hui packet and owned Ollama transport tests; profile byte hashes retained."
+    },
+    {
+      "path": "tests/test_p2_portability.py",
+      "previous_sha256": "951c1c1102806ad11d8073cff2499b1c3e9f4099598ad03e737164c0a213382c",
+      "status": "adapted-safety-suite",
+      "retired_tests": [
+        "test_backend_defaults_standalone_and_legacy_requires_explicit_path",
+        "test_workflow_contract_and_ledger_delegation_preserves_mock_seam",
+        "test_authority_storage_failures_are_always_hard_stops",
+        "test_expired_authority_does_not_retry_or_switch_providers",
+        "test_advisory_cli_returns_json_after_review",
+        "test_grok_import_cli_returns_json_and_forwards_standalone_state",
+        "test_grok_preparation_forwards_explicit_backend_and_state"
+      ],
+      "reason": "Keep file/state/runtime/staging gates; old backend/provider/callback API is replaced by current Kernel tests."
+    },
+    {
+      "path": "tests/test_p4_check_execution.py",
+      "previous_sha256": "ffe39685a86916596fb33323c4b1a2983db1e620a493ea32dacf9c4c9db8b064",
+      "status": "adapted-safety-suite",
+      "retired_tests": [
+        "scenario",
+        "invalid_checks",
+        "test_foreground_baseline_startup_failure_makes_zero_provider_calls",
+        "test_foreground_postgeneration_startup_failure_never_retries_or_falls_back",
+        "test_foreground_ordinary_assertion_still_uses_remaining_local_attempt"
+      ],
+      "reason": "Keep actual check-receipt and frozen-interpreter gates; same behavior runs through current shared pipeline tests."
+    },
+    {
+      "path": "tests/test_public_resources.py",
+      "previous_sha256": "4420b22eba2c84f50420d68a98d59574cdb07f182e4dfc58f9fac296fa60aa7d",
+      "status": "adapted-safety-suite",
+      "retired_tests": [
+        "test_automation_fingerprint_reads_only_installed_package_resources"
+      ],
+      "reason": "Automation fingerprint retired; v2 package fingerprint is tested separately. Keep exact nonhistorical Node file grants."
+    },
+    {
+      "path": "tests/legacy/test_workflow_core.py",
+      "previous_sha256": "920fa7af44c859d5b816416dfaf2bf529fec9e57e25e339bd1b81530b22d9849",
+      "status": "adapted-safety-suite",
+      "reason": "Replace v1 packet fixture fields with authorityId and explicit Hui; preserve edit/path/ownership/check assertions."
+    },
+    {
+      "path": "tests/legacy/test_workflow_artifacts.py",
+      "previous_sha256": "60b24342ef07c1010c1f12b5968c365613e9f1141d56a0b5f13e10b1a518906a",
+      "status": "adapted-safety-suite",
+      "reason": "Replace v1 packet fixture fields with authorityId and explicit Hui; preserve edit/path/ownership/check assertions."
+    },
+    {
+      "path": "tests/legacy/test_workflow_preview.py",
+      "previous_sha256": "40e93d9635f77707a791325c835aee701fe6aa3627594d12a9ca60b08eb6a7df",
+      "status": "adapted-safety-suite",
+      "reason": "Replace v1 packet fixture fields with authorityId and explicit Hui; preserve edit/path/ownership/check assertions."
+    },
+    {
+      "path": "tests/legacy/test_official_generation_integration.py",
+      "previous_sha256": "11a762de3f259b642e0af5deadd6d2f35e32f4c38d3e51e496d9c47ffdadf0d0",
+      "status": "adapted-safety-suite",
+      "retired_tests": [
+        "test_status_write_failure_is_recorded_and_pipeline_does_not_fall_back"
+      ],
+      "reason": "Moved transport import, explicit v2 profile packets and effective Work deadline; old callback diagnostic test replaced by shared typed-engine diagnostic test. Closed parser/health/stream failure checks remain."
+    },
+    {
+      "path": "tests/legacy/test_browser_finalize_contract.py",
+      "previous_sha256": "684556b9d22e5541f5f6dd21d10b473aae3f46f9d4222bcfa7fcba60edaa43bd",
+      "status": "adapted-safety-suite",
+      "reason": "Retain all timestamp, closure, no-overwrite and interrupted-finalization assertions with explicit pending attempt receipt and same-slot Kernel finalization."
+    },
+    {
+      "path": "tests/legacy/hn-local-worker.config.toml",
+      "previous_sha256": "3379530e554d9aa1fa08bf11c5e8dad4511e73942075e36ae380a8554f0b6cb1",
+      "status": "retired-unused-fixture",
+      "reason": "Only retired pilot/protocol tests referenced this synthetic legacy fixture."
+    },
+    {
+      "path": "tests/legacy/model.json",
+      "previous_sha256": "ace4bb15f4f7fa2044428ad8b8dec8b055de179ceed3b84f9d8f8c97e9aec97e",
+      "status": "retired-unused-fixture",
+      "reason": "Only retired pilot/protocol tests referenced this synthetic legacy fixture."
+    },
+    {
+      "path": "tests/legacy/task.txt",
+      "previous_sha256": "e4b229a250b37ba406d1f1bd51cd93d2b2a13382c2323bf1f7a9922abcf3e453",
+      "status": "retired-unused-fixture",
+      "reason": "Only retired pilot/protocol tests referenced this synthetic legacy fixture."
+    },
+    {
+      "path": "tests/legacy/test_generate_stream.py",
+      "previous_sha256": "fd95eb8d34afc3db63556632993df307905f85d81d2d72cd7f499ce7250a34b0",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_generation_health.py",
+      "previous_sha256": "64a6473ebe3582cb89f45a9d2e2fbaa4e6bf724da93e4b9f7bafdfce17e76d37",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_generation_profile.py",
+      "previous_sha256": "a458c4d581d6a78ad7d32f142b2b4b1f5de637dc5feebb5ebcc13790a73b1bc0",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_huihui_health.py",
+      "previous_sha256": "54615702885b0a08dc3eec12877ab2f2ec9338f33a7445163e45e4d545a3935b",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_huihui_stream.py",
+      "previous_sha256": "012ea2a55c4352a96aac5cddab1006c596a951506e7231917310613d9ea32756",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_metrics_contract.py",
+      "previous_sha256": "3369baa2915b0922700bf3cec86f403322bba64beb2060f39afe9e195a441123",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_node_runtime_policy.py",
+      "previous_sha256": "787f223bff4a5e42b683253cea77ba16410ff8a2e6f96ddd7310540d395378c9",
+      "status": "adapted-safety-suite",
+      "reason": "Retained supported behavior; changed fixtures use current codec/closure/cleanup and concrete packet APIs."
+    },
+    {
+      "path": "tests/legacy/test_run_bounded.py",
+      "previous_sha256": "8c4790bd590308f8cead0b9ab978db3101d57966d9c2904fb9742af6be710b09",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_workflow_browser.py",
+      "previous_sha256": "787e0eff784b88918c49b5c14a68aa5402d89492a2aa35af7558f77436d3d4de",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_workflow_metrics.py",
+      "previous_sha256": "096fd3d3288c6efa8103d63c56d0487c985ddeb71b9fa08759e7ca59464f3887",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    },
+    {
+      "path": "tests/legacy/test_workflow_validation.py",
+      "previous_sha256": "12a50a6626827bdde9ee84d9c775733184ea45a9f3d1c372b58ce342e6c8e61f",
+      "status": "adapted-safety-suite",
+      "reason": "Retained supported behavior; changed fixtures use current codec/closure/cleanup and concrete packet APIs."
+    },
+    {
+      "path": "tests/test_workflow_git_boundary.py",
+      "previous_sha256": "b0000c415318bdc604ad4f113a282c616424756a53fc49d9289a457dc7fa3009",
+      "status": "retained-unchanged",
+      "reason": "Inherited supported assertion remains unchanged."
+    }
+  ]
+}

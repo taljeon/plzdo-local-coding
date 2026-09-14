@@ -1,0 +1,103 @@
+{
+  "schema": "hn-node-exact-library-reads.v1",
+  "node": {
+    "path": "/opt/homebrew/Cellar/node/24.10.0/bin/node",
+    "sha256": "e7daf91e350dcfc19c3f67bef0a463c1269e98e084606c2e38edf2c349e3842a",
+    "version": "24.10.0",
+    "command_aliases": [
+      "node",
+      "/opt/homebrew/bin/node",
+      "/opt/homebrew/Cellar/node/24.10.0/bin/node"
+    ]
+  },
+  "libraries": [
+    {
+      "alias": "/opt/homebrew/opt/libuv/lib/libuv.1.dylib",
+      "target": "/opt/homebrew/Cellar/libuv/1.51.0/lib/libuv.1.0.0.dylib",
+      "sha256": "91a0a2c2acb665c12cced19702d555836936c13d65370591d16dfab660f98308"
+    },
+    {
+      "alias": "/opt/homebrew/opt/simdjson/lib/libsimdjson.27.dylib",
+      "target": "/opt/homebrew/Cellar/simdjson/4.0.7/lib/libsimdjson.27.0.0.dylib",
+      "sha256": "40d04a7955aefe9d9ec3f73fddd9a59ca9e3477732fe8ef275ae0fcc290f387c"
+    },
+    {
+      "alias": "/opt/homebrew/opt/brotli/lib/libbrotlidec.1.dylib",
+      "target": "/opt/homebrew/Cellar/brotli/1.1.0/lib/libbrotlidec.1.1.0.dylib",
+      "sha256": "80f1b901bf9de26e2aec820da6c7e493a7ff71438d39b4033f8848779a3e4964"
+    },
+    {
+      "alias": "/opt/homebrew/opt/brotli/lib/libbrotlienc.1.dylib",
+      "target": "/opt/homebrew/Cellar/brotli/1.1.0/lib/libbrotlienc.1.1.0.dylib",
+      "sha256": "f1b7102271e0f2235a3d6dd27742d83d3967eca1524aec6e5265b15c60eda604"
+    },
+    {
+      "alias": "/opt/homebrew/opt/c-ares/lib/libcares.2.dylib",
+      "target": "/opt/homebrew/Cellar/c-ares/1.34.5/lib/libcares.2.19.4.dylib",
+      "sha256": "8274f9173d9d88081809db4eb106088616597f64b8e581488f21faf9ed1c0aa7"
+    },
+    {
+      "alias": "/opt/homebrew/opt/libnghttp2/lib/libnghttp2.14.dylib",
+      "target": "/opt/homebrew/Cellar/libnghttp2/1.67.1/lib/libnghttp2.14.dylib",
+      "sha256": "3d414bdfd057e2f16c6c15880f052eb1b453d46016f6e0d9f55119730342f7ba"
+    },
+    {
+      "alias": "/opt/homebrew/opt/libnghttp3/lib/libnghttp3.9.dylib",
+      "target": "/opt/homebrew/Cellar/libnghttp3/1.12.0/lib/libnghttp3.9.4.0.dylib",
+      "sha256": "c8114f891bff76c6bc9cb84db01f91c11aff878abb67dcc86e052dede45b3bf8"
+    },
+    {
+      "alias": "/opt/homebrew/opt/libngtcp2/lib/libngtcp2.16.dylib",
+      "target": "/opt/homebrew/Cellar/libngtcp2/1.17.0/lib/libngtcp2.16.dylib",
+      "sha256": "2b705375d24fac919b0a2a37cacde6bc757267fb41b54dcf04847be8f2b56588"
+    },
+    {
+      "alias": "/opt/homebrew/opt/sqlite/lib/libsqlite3.dylib",
+      "target": "/opt/homebrew/Cellar/sqlite/3.50.4/lib/libsqlite3.3.50.4.dylib",
+      "sha256": "a2dd8919474bea27abb99dd54a7c5a245c6e65e116d64ba98f5f36c82ac8f4f0"
+    },
+    {
+      "alias": "/opt/homebrew/opt/uvwasi/lib/libuvwasi.dylib",
+      "target": "/opt/homebrew/Cellar/uvwasi/0.0.23/lib/libuvwasi.dylib",
+      "sha256": "a1a5b563eea037bbb2dedcab958a4a78bc8dd011a3eb69315f187d4c48843712"
+    },
+    {
+      "alias": "/opt/homebrew/opt/zstd/lib/libzstd.1.dylib",
+      "target": "/opt/homebrew/Cellar/zstd/1.5.7_1/lib/libzstd.1.5.7.dylib",
+      "sha256": "602d50cbe6fad0f0da6d1b73284ae3f75316015aea482ebd55614b6df2406b43"
+    },
+    {
+      "alias": "/opt/homebrew/opt/openssl@3/lib/libcrypto.3.dylib",
+      "target": "/opt/homebrew/Cellar/openssl@3/3.6.3/lib/libcrypto.3.dylib",
+      "sha256": "a12805a18cd5e4f733fa8727b91afa08b587f9da5a760517cd79cb508a3a3f71"
+    },
+    {
+      "alias": "/opt/homebrew/opt/openssl@3/lib/libssl.3.dylib",
+      "target": "/opt/homebrew/Cellar/openssl@3/3.6.3/lib/libssl.3.dylib",
+      "sha256": "ffd8ac6981000def0928367924b6cb1e7a98712efbc06e2a2f3f750138bd89ca"
+    },
+    {
+      "alias": "/opt/homebrew/opt/icu4c@77/lib/libicui18n.77.dylib",
+      "target": "/opt/homebrew/Cellar/icu4c@77/77.1/lib/libicui18n.77.1.dylib",
+      "sha256": "e7424bd49b3bfd8bb9be1b653530a2f4bc074b174254fda73d63bca6d215b18f"
+    },
+    {
+      "alias": "/opt/homebrew/opt/icu4c@77/lib/libicuuc.77.dylib",
+      "target": "/opt/homebrew/Cellar/icu4c@77/77.1/lib/libicuuc.77.1.dylib",
+      "sha256": "848c6be8f00da778505e2c9f7b73c8afec92b1d2b42a984b950cfd62e232674e"
+    },
+    {
+      "alias": "/opt/homebrew/opt/icu4c@77/lib/libicudata.77.dylib",
+      "target": "/opt/homebrew/Cellar/icu4c@77/77.1/lib/libicudata.77.1.dylib",
+      "sha256": "7aae18a54bd008f9543255ae964c4eecdc8de21e6894ef223272c4db1a21bde6"
+    }
+  ],
+  "policy": {
+    "matching_node_only": true,
+    "exact_file_read_only": true,
+    "directory_read": false,
+    "network_change": false,
+    "write_change": false,
+    "auto_refresh": false
+  }
+}

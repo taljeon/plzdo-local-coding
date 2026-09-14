@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "plzdo.private-result.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "overlayVersion", "command", "status", "exitCode", "result", "error", "apply_status", "publication_authority"],
+  "properties": {
+    "schemaVersion": {"const": "plzdo.private-result.v1"},
+    "overlayVersion": {"const": "0.3.0"},
+    "command": {"enum": ["doctor", "identity", "schema", "draft", "approve", "trust-verifier", "parent-prepare", "parent-prepare-scope", "parent-adopt", "scope-draft", "scope-approve", "scope-admit", "status", "run", "preview", "finish-browser", "review", "grok-prepare", "grok-approve", "grok-send", "grok-import"]},
+    "status": {"enum": ["ok", "blocked", "failed", "pending"]},
+    "exitCode": {"enum": [0, 1, 3]},
+    "result": {"type": ["object", "null"]},
+    "error": {"type": ["string", "null"]},
+    "apply_status": {"const": "not_applied"},
+    "publication_authority": {"const": false}
+  }
+}

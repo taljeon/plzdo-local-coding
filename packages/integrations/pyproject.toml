@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plzdo-integrations"
+version = "0.3.0"
+description = "Optional user-owned AI integration composition for PlzDo local coding"
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["plzdo==0.3.0", "plzdo-local-runtime==0.3.0"]
+
+[tool.setuptools]
+script-files = ["bin/plzdo-private", "bin/plzdo_private_entry.py"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["plzdo_private_overlay*"]
+
+[tool.setuptools.package-data]
+plzdo_private_overlay = ["schemas/*.json"]

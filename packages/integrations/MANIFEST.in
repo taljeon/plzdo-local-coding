@@ -1,0 +1,2 @@
+include AGENTS.md dependency-status.json
+recursive-include tests *.py

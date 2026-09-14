@@ -1,0 +1,941 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:plzdo.local.scope.v2",
+  "description": "Closed structural contract. Runtime additionally verifies fresh authority, engine and packet pins, attempt policy and the locked ledger.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "expiresAt",
+    "policyFingerprint",
+    "execution",
+    "createdAt",
+    "status",
+    "approvalHash",
+    "approvedBy",
+    "approvedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "plzdo.local.scope.v2"
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "expiresAt": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "policyFingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "execution": {
+      "$ref": "#/$defs/execution"
+    },
+    "createdAt": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "approved",
+        "revoked",
+        "completed"
+      ]
+    },
+    "approvalHash": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/sha256"
+        }
+      ]
+    },
+    "approvedBy": {
+      "enum": [
+        null,
+        "operator",
+        "human",
+        "user"
+      ]
+    },
+    "approvedAt": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/timestamp"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "draft"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "approvalHash": {
+            "type": "null"
+          },
+          "approvedBy": {
+            "type": "null"
+          },
+          "approvedAt": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "approvalHash": {
+            "$ref": "#/$defs/sha256"
+          },
+          "approvedAt": {
+            "$ref": "#/$defs/timestamp"
+          },
+          "approvedBy": {
+            "enum": [
+              "operator",
+              "human",
+              "user"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,119}$",
+      "maxLength": 120
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^/",
+      "minLength": 2
+    },
+    "directory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "device",
+        "inode"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "device": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "inode": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "device",
+        "inode",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "device": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "inode": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "verifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "python",
+        "entrypoint",
+        "config",
+        "codeRoots",
+        "codeFiles"
+      ],
+      "properties": {
+        "python": {
+          "$ref": "#/$defs/file"
+        },
+        "entrypoint": {
+          "$ref": "#/$defs/file"
+        },
+        "config": {
+          "$ref": "#/$defs/file"
+        },
+        "codeRoots": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/directory"
+          }
+        },
+        "codeFiles": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1024,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/file"
+          }
+        }
+      }
+    },
+    "verifierResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "status",
+        "requestSha256",
+        "parentApprovalHash",
+        "parentCreatedAt",
+        "parentApprovedAt",
+        "observedAt",
+        "authorizationBasis",
+        "atomicLease"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "plzdo.parent-verifier.v2"
+        },
+        "status": {
+          "enum": [
+            "absent",
+            "prepared",
+            "verified"
+          ]
+        },
+        "requestSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "parentApprovalHash": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "parentCreatedAt": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "parentApprovedAt": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observedAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "authorizationBasis": {
+          "const": "operator-owned-local-record-snapshot"
+        },
+        "atomicLease": {
+          "const": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "verified"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "parentApprovalHash": {
+                "$ref": "#/$defs/sha256"
+              },
+              "parentCreatedAt": {
+                "$ref": "#/$defs/timestamp"
+              },
+              "parentApprovedAt": {
+                "$ref": "#/$defs/timestamp"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "parentApprovalHash": {
+                "type": "null"
+              },
+              "parentCreatedAt": {
+                "type": "null"
+              },
+              "parentApprovedAt": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "verifierTrust": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "configuredAt",
+        "runtimeState",
+        "verifier",
+        "descriptorSha256"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "plzdo.parent-verifier-trust.v2"
+        },
+        "configuredAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "runtimeState": {
+          "$ref": "#/$defs/directory"
+        },
+        "verifier": {
+          "$ref": "#/$defs/verifier"
+        },
+        "descriptorSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "formalizationId",
+        "projectId",
+        "project"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/directory"
+        },
+        "formalizationId": {
+          "$ref": "#/$defs/id"
+        },
+        "projectId": {
+          "$ref": "#/$defs/id"
+        },
+        "project": {
+          "$ref": "#/$defs/directory"
+        }
+      }
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+    },
+    "basePolicy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode"
+          ],
+          "properties": {
+            "mode": {
+              "const": "exact"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "ref",
+            "anchor"
+          ],
+          "properties": {
+            "mode": {
+              "const": "descendant-within-scope"
+            },
+            "ref": {
+              "type": "string",
+              "pattern": "^refs/heads/",
+              "maxLength": 240
+            },
+            "anchor": {
+              "$ref": "#/$defs/commit"
+            }
+          }
+        }
+      ]
+    },
+    "previewAuthorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approved",
+        "bind",
+        "source",
+        "requireStopBeforeFinalize",
+        "maxLifetimeSeconds",
+        "maxSessionsPerRun"
+      ],
+      "properties": {
+        "approved": {
+          "const": true
+        },
+        "bind": {
+          "const": "127.0.0.1"
+        },
+        "source": {
+          "const": "exact-generated-artifact-allowlist-only"
+        },
+        "requireStopBeforeFinalize": {
+          "const": true
+        },
+        "maxLifetimeSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 300
+        },
+        "maxSessionsPerRun": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        }
+      }
+    },
+    "taskScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "templates"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "plzdo.task-scope.v2"
+        },
+        "templates": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 16,
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "packet",
+              "basePolicy"
+            ],
+            "properties": {
+              "packet": {
+                "type": "object"
+              },
+              "basePolicy": {
+                "$ref": "#/$defs/basePolicy"
+              }
+            }
+          }
+        }
+      }
+    },
+    "engines": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 1,
+      "items": {
+        "enum": [
+          "ollama"
+        ]
+      }
+    },
+    "enginePins": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "ollama": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "implementationSha256",
+            "roles"
+          ],
+          "properties": {
+            "implementationSha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "roles": {
+              "const": [
+                "generate"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "engineId",
+              "role"
+            ],
+            "properties": {
+              "engineId": {
+                "const": "ollama"
+              },
+              "role": {
+                "const": "generate"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "generationPlan": {
+      "type": "array",
+      "maxItems": 2,
+      "items": false,
+      "prefixItems": [
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "engineId",
+                "role",
+                "ordinal"
+              ],
+              "properties": {
+                "engineId": {
+                  "const": "ollama"
+                },
+                "role": {
+                  "const": "generate"
+                },
+                "ordinal": {
+                  "const": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "engineId",
+                "role",
+                "ordinal"
+              ],
+              "properties": {
+                "engineId": {
+                  "const": "ollama"
+                },
+                "role": {
+                  "const": "generate"
+                },
+                "ordinal": {
+                  "const": 2
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "required": [
+              "engineId"
+            ],
+            "properties": {
+              "engineId": {
+                "const": "ollama"
+              }
+            }
+          },
+          "minContains": 0,
+          "maxContains": 2
+        }
+      ]
+    },
+    "binding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "packetSha256",
+            "kind",
+            "maxRuns",
+            "allowedEngines",
+            "allowedOperations",
+            "generationAttemptPlan",
+            "repository",
+            "baseRevision"
+          ],
+          "properties": {
+            "packetSha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "kind": {
+              "const": "repo-edit"
+            },
+            "maxRuns": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "allowedEngines": {
+              "$ref": "#/$defs/engines"
+            },
+            "allowedOperations": {
+              "$ref": "#/$defs/operations"
+            },
+            "generationAttemptPlan": {
+              "$ref": "#/$defs/generationPlan"
+            },
+            "repository": {
+              "$ref": "#/$defs/path"
+            },
+            "baseRevision": {
+              "$ref": "#/$defs/commit"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "packetSha256",
+            "kind",
+            "maxRuns",
+            "allowedEngines",
+            "allowedOperations",
+            "generationAttemptPlan",
+            "baseline",
+            "allowedPaths"
+          ],
+          "properties": {
+            "packetSha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "kind": {
+              "const": "artifact-create"
+            },
+            "maxRuns": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "allowedEngines": {
+              "$ref": "#/$defs/engines"
+            },
+            "allowedOperations": {
+              "$ref": "#/$defs/operations"
+            },
+            "generationAttemptPlan": {
+              "$ref": "#/$defs/generationPlan"
+            },
+            "baseline": {
+              "const": "empty"
+            },
+            "allowedPaths": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 64,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "packetSha256",
+            "kind",
+            "maxRuns",
+            "allowedEngines",
+            "allowedOperations",
+            "generationAttemptPlan"
+          ],
+          "properties": {
+            "packetSha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "kind": {
+              "const": "compute-analysis"
+            },
+            "maxRuns": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "allowedEngines": {
+              "const": []
+            },
+            "allowedOperations": {
+              "const": []
+            },
+            "generationAttemptPlan": {
+              "const": []
+            }
+          }
+        }
+      ]
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxLiveIntegrationCalls",
+        "allowedEngines",
+        "enginePins",
+        "maxTotalRuns",
+        "maxChildren",
+        "maxRunsPerChild",
+        "taskScope"
+      ],
+      "properties": {
+        "maxLiveIntegrationCalls": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "allowedEngines": {
+          "$ref": "#/$defs/engines"
+        },
+        "enginePins": {
+          "$ref": "#/$defs/enginePins"
+        },
+        "previewAuthorization": {
+          "$ref": "#/$defs/previewAuthorization"
+        },
+        "maxTotalRuns": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "maxChildren": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "maxRunsPerChild": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "taskScope": {
+          "$ref": "#/$defs/taskScope"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "maxLiveIntegrationCalls": {
+                "const": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "allowedEngines": {
+                "const": []
+              },
+              "enginePins": {
+                "const": {}
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "allowedEngines": {
+                "minItems": 1
+              },
+              "enginePins": {
+                "minProperties": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "allowedEngines": {
+                "contains": {
+                  "const": "ollama"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "enginePins": {
+                "required": [
+                  "ollama"
+                ]
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "enginePins": {
+                "not": {
+                  "required": [
+                    "ollama"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "id",
+        "preparedAt",
+        "expiresAt",
+        "runtimeState",
+        "policyFingerprint",
+        "parentReference",
+        "verifier",
+        "execution",
+        "requestSha256"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "plzdo.parent-scope-request.v2"
+        },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "preparedAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "expiresAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "runtimeState": {
+          "$ref": "#/$defs/directory"
+        },
+        "policyFingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "parentReference": {
+          "$ref": "#/$defs/parent"
+        },
+        "verifier": {
+          "$ref": "#/$defs/verifier"
+        },
+        "execution": {
+          "$ref": "#/$defs/execution"
+        },
+        "requestSha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "verifierInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "operation",
+        "request"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "plzdo.parent-verifier-input.v2"
+        },
+        "operation": {
+          "enum": [
+            "prepare",
+            "verify"
+          ]
+        },
+        "request": {
+          "$ref": "#/$defs/request"
+        }
+      }
+    }
+  }
+}

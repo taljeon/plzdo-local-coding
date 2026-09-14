@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "plzdo.private-dependency-status.v1",
+  "candidateRequirements": [
+    "plzdo==0.3.0",
+    "plzdo-local-runtime==0.3.0"
+  ],
+  "releaseArtifactPin": "source-only:v0.3.0",
+  "releasedArtifactHashes": null,
+  "operationalInstallationApproved": false
+}
