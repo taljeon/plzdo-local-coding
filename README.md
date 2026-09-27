@@ -1,3 +1,7 @@
+This add-on lets you use the AI coding tools you choose with PlzDo.
+It keeps proposed code changes and their checks together so you can review the result before using it.
+You can choose an AI model on your own computer, an external AI service, or both, and set up only what you need.
+
 # PlzDo local coding and optional integrations
 
 Use an existing local Ollama model, explicitly selected external AI tools, or
